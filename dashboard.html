@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bảng Điều Khiển – Uyên English</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="description" content="Tổng quan tiến độ học tập Tiếng Anh của bạn." />
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <link rel="stylesheet" href="css/enhancements.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <!-- GSAP CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+<div class="app-layout">
+
+  <!-- ── Sidebar ──────────────────────────────────────────── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon">UE</div>
+      <div class="sidebar-logo-text">
+        <span class="brand-name">Uyên English</span>
+        <span class="brand-sub">Học Tiếng Anh Online</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Chính</div>
+
+      <a href="dashboard.html" class="nav-item active" id="nav-home">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Trang chủ
+      </a>
+
+      <a href="course.html" class="nav-item" id="nav-course">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+        Khóa học của tôi
+      </a>
+        Tiến độ học tập
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-card" id="sidebarUser">
+        <div class="user-avatar" id="sidebarAvatar">?</div>
+        <div class="user-info">
+          <div class="user-name" id="sidebarName">Học viên</div>
+          <div class="user-role" id="sidebarRole">Đang học</div>
+        </div>
+      </div>
+      <button class="nav-item" id="logoutBtn" style="width:100%;margin-top:var(--space-2);color:rgba(255,80,80,.7)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Đăng xuất
+      </button>
+    </div>
+  </aside>
+
+  <!-- ── Main Content ──────────────────────────────────────── -->
+  <div class="main-content">
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <button class="topbar-btn" id="menuToggle" aria-label="Toggle menu" style="display:none">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="topbar-title">📚 Tổng quan học tập</div>
+      <div class="topbar-actions">
+        <div class="topbar-btn" title="Thông báo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+        </div>
+        <a href="index.html" class="topbar-btn" title="Trang chủ">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+        </a>
+      </div>
+    </header>
+
+    <!-- Dashboard -->
+    <div class="dashboard-content">
+      <!-- Greeting -->
+      <div class="page-header">
+        <h1 class="page-greeting" id="greetingText">Xin chào! 👋</h1>
+        <p class="page-subtitle">Hôm nay là ngày tốt để học Tiếng Anh. Tiếp tục hành trình của bạn nhé!</p>
+      </div>
+
+      <div class="dashboard-grid">
+
+        <!-- ── Countdown Banner ────────────────────────────── -->
+        <div class="countdown-banner">
+          <div class="countdown-left">
+            <div class="countdown-event-tag">
+              <div class="countdown-dot"></div>
+              Đang đếm ngược
+            </div>
+            <div class="countdown-title">🎓 Kỳ thi THPT Quốc Gia 2027</div>
+            <div class="countdown-subtitle">26 tháng 6 năm 2027 · Hãy chuẩn bị thật tốt!</div>
+          </div>
+          <div class="countdown-timer">
+            <div class="time-unit">
+              <div class="time-box"><div class="time-number" id="cd-days">---</div></div>
+              <div class="time-label">Ngày</div>
+            </div>
+            <div class="countdown-sep">:</div>
+            <div class="time-unit">
+              <div class="time-box"><div class="time-number" id="cd-hours">--</div></div>
+              <div class="time-label">Giờ</div>
+            </div>
+            <div class="countdown-sep">:</div>
+            <div class="time-unit">
+              <div class="time-box"><div class="time-number" id="cd-minutes">--</div></div>
+              <div class="time-label">Phút</div>
+            </div>
+            <div class="countdown-sep">:</div>
+            <div class="time-unit">
+              <div class="time-box"><div class="time-number" id="cd-seconds">--</div></div>
+              <div class="time-label">Giây</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── My Courses ──────────────────────────────────── -->
+        <div class="courses-section card" style="padding:var(--space-6)">
+          <div class="section-header-row">
+            <h2 class="section-heading">📖 Khóa học của tôi</h2>
+            <a href="course.html" class="btn btn-outline btn-sm">Xem tất cả</a>
+          </div>
+          <div class="courses-scroll" id="coursesGrid">
+            <!-- injected by JS -->
+          </div>
+        </div>
+
+        <!-- ── Right Column ────────────────────────────────── -->
+        <div class="right-column">
+
+          <!-- Weekly Calendar -->
+          <div class="card" style="padding:var(--space-5) var(--space-5)">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:var(--space-4)">
+              <h3 style="font-size:var(--font-size-sm);font-weight:700;color:var(--gray-900)">📅 Lịch học trong tuần</h3>
+              <span class="badge badge-blue" id="weekLabel"></span>
+            </div>
+            <div class="week-days" id="weekDays"></div>
+            <div class="upcoming-lessons" id="upcomingLessons"></div>
+          </div>
+
+          <!-- Progress Doughnut -->
+          <div class="card" style="padding:var(--space-5) var(--space-5)">
+            <h3 style="font-size:var(--font-size-sm);font-weight:700;color:var(--gray-900);margin-bottom:var(--space-4)">📊 Tiến độ học tập</h3>
+            <div class="progress-chart">
+              <div class="chart-container">
+                <canvas id="progressChart" width="160" height="160"></canvas>
+                <div class="chart-center-text">
+                  <div class="chart-percent" id="chartPct">0%</div>
+                  <div class="chart-label">Hoàn thành</div>
+                </div>
+              </div>
+              <div class="chart-legend">
+                <div class="legend-row">
+                  <div class="legend-dot-label">
+                    <div class="legend-dot" style="background:var(--primary-500)"></div>
+                    Đã hoàn thành
+                  </div>
+                  <div class="legend-val" id="legendDone">0%</div>
+                </div>
+                <div class="legend-row">
+                  <div class="legend-dot-label">
+                    <div class="legend-dot" style="background:var(--gray-200)"></div>
+                    Còn lại
+                  </div>
+                  <div class="legend-val" id="legendLeft">100%</div>
+                </div>
+              </div>
+              <div style="width:100%;margin-top:var(--space-4)">
+                <div style="font-size:var(--font-size-xs);color:var(--gray-400);text-align:center" id="progressCourse"></div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- end right-column -->
+      </div><!-- end dashboard-grid -->
+    </div><!-- end dashboard-content -->
+  </div><!-- end main-content -->
+</div><!-- end app-layout -->
+
+<!-- Toast -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script>
+// ============================================================
+//  dashboard.js – inline
+// ============================================================
+
+// ── Auth Guard ────────────────────────────────────────────────
+const rawUser = localStorage.getItem('ue_user') || sessionStorage.getItem('ue_user');
+if (!rawUser) { window.location.href = 'login.html'; }
+const currentUser = JSON.parse(rawUser);
+
+// ── Greeting ──────────────────────────────────────────────────
+function getGreeting() {
+  const h = new Date().getHours();
+  if (h < 12) return 'Chào buổi sáng';
+  if (h < 18) return 'Chào buổi chiều';
+  return 'Chào buổi tối';
+}
+
+document.getElementById('greetingText').textContent =
+  `${getGreeting()}, ${currentUser.name.split(' ').pop()}! 👋`;
+
+// Sidebar user info
+const avt = currentUser.avatar || currentUser.name.charAt(0);
+if (avt.includes('.jpg') || avt.includes('.png')) {
+  document.getElementById('sidebarAvatar').innerHTML = `<img src="${avt}" style="width:100%;height:100%;object-fit:cover;object-position:top;border-radius:50%">`;
+  document.getElementById('sidebarAvatar').style.background = 'transparent';
+} else {
+  document.getElementById('sidebarAvatar').textContent = avt;
+}
+document.getElementById('sidebarName').textContent = currentUser.name;
+document.getElementById('sidebarRole').textContent =
+  currentUser.role === 'admin' ? '👑 Admin – Giáo viên' : '🎓 Học viên';
+
+// ── Logout ────────────────────────────────────────────────────
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  localStorage.removeItem('ue_user');
+  sessionStorage.removeItem('ue_user');
+  window.location.href = 'login.html';
+});
+
+// ── Countdown ─────────────────────────────────────────────────
+const TARGET_DATE = new Date('2027-06-26T06:00:00');
+
+function updateCountdown() {
+  const now = new Date();
+  const diff = TARGET_DATE - now;
+  if (diff <= 0) {
+    ['cd-days','cd-hours','cd-minutes','cd-seconds'].forEach(id => {
+      document.getElementById(id).textContent = '00';
+    });
+    return;
+  }
+  const days    = Math.floor(diff / 86400000);
+  const hours   = Math.floor((diff % 86400000) / 3600000);
+  const minutes = Math.floor((diff % 3600000) / 60000);
+  const seconds = Math.floor((diff % 60000) / 1000);
+
+  document.getElementById('cd-days').textContent    = String(days).padStart(3,'0');
+  document.getElementById('cd-hours').textContent   = String(hours).padStart(2,'0');
+  document.getElementById('cd-minutes').textContent = String(minutes).padStart(2,'0');
+  document.getElementById('cd-seconds').textContent = String(seconds).padStart(2,'0');
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// ── Load Courses ──────────────────────────────────────────────
+async function loadCourses() {
+  let courses = [];
+  try {
+    const res = await fetch(`data/course-data-${currentUser.id}.json`);
+    courses = await res.json();
+  } catch (error) {
+    console.warn('Local fetch failed, using fallback data:', error);
+    courses = [
+      {"course_id":"english-basic","title":"Tiếng Anh Nền Tảng – Cô Nhã Uyên","subtitle":"Ngữ pháp cơ bản, Từ vựng & Kỹ năng làm bài thi","teacher":"Phạm Nhã Uyên","rating":5.0,"reviews":24,"weeks":[{"week_id":"w1","name":"Tuần 1 – Nền Tảng Ngữ Pháp","sessions":[{"session_id":"w1s1","name":"Buổi 1 – Thì Hiện Tại Đơn & Hiện Tại Tiếp Diễn","date":"2026-07-05","time":"08:00"},{"session_id":"w1s2","name":"Buổi 2 – Thì Quá Khứ Đơn & Quá Khứ Tiếp Diễn","date":"2026-07-08","time":"08:00"}]},{"week_id":"w2","name":"Tuần 2 – Từ Vựng & Phrasal Verbs","sessions":[{"session_id":"w2s1","name":"Buổi 3 – Phrasal Verbs Thông Dụng (Phần 1)","date":"2026-07-12","time":"08:00"},{"session_id":"w2s2","name":"Buổi 4 – Idioms & Expressions Thường Gặp","date":"2026-07-15","time":"08:00"}]},{"week_id":"w3","name":"Tuần 3 – Kỹ Năng Làm Bài Thi","sessions":[{"session_id":"w3s1","name":"Buổi 5 – Kỹ Năng Đọc Hiểu (Reading)","date":"2026-07-19","time":"08:00"},{"session_id":"w3s2","name":"Buổi 6 – Kỹ Năng Viết (Writing Basics)","date":"2026-07-22","time":"08:00"}]}]},
+      {"course_id":"ngu-phap-chuyen-sau","title":"Ngữ Pháp Chuyên Sâu","subtitle":"Bứt phá điểm số với các chuyên đề ngữ pháp nâng cao","teacher":"Phạm Nhã Uyên","rating":4.9,"reviews":18,"weeks":[]},
+      {"course_id":"tu-vung-phrasal-verbs","title":"Từ Vựng & Phrasal Verbs","subtitle":"Mở rộng vốn từ vựng và thành ngữ ứng dụng thực tế","teacher":"Phạm Nhã Uyên","rating":5.0,"reviews":42,"weeks":[]},
+      {"course_id":"luyen-thi-ky-nang","title":"Luyện Thi – Kỹ Năng Làm Bài","subtitle":"Chiến thuật giải đề và tối ưu thời gian làm bài thi","teacher":"Phạm Nhã Uyên","rating":4.8,"reviews":56,"weeks":[]}
+    ];
+  }
+
+  try {
+    const grid = document.getElementById('coursesGrid');
+    grid.innerHTML = '';
+
+    const userCourses = currentUser.role === 'admin' ? courses : courses.filter(c => currentUser.courses.includes(c.course_id));
+
+    if (!userCourses.length) {
+      grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;color:var(--gray-400);padding:var(--space-10)">
+        Bạn chưa đăng ký khóa học nào. <a href="index.html#register" class="text-primary">Đăng ký ngay →</a>
+      </div>`;
+      return userCourses;
+    }
+
+    userCourses.forEach(course => {
+      const progress = getProgress(course.course_id, course);
+      const pct = progress.pct;
+
+      const card = document.createElement('div');
+      card.className = 'course-card';
+      card.innerHTML = `
+        <div class="course-thumbnail">
+          <div class="course-thumb-icon">📘</div>
+          <div class="course-status-badge status-active">Đang học</div>
+        </div>
+        <div class="course-card-body">
+          <div class="course-card-title">${course.title}</div>
+          <div class="course-card-meta">
+            <span>⭐ ${course.rating}</span>
+            <span>(${course.reviews} đánh giá)</span>
+          </div>
+          <div class="course-card-progress">
+            <div class="course-card-progress-text">
+              <span>Tiến độ</span>
+              <strong>${pct}%</strong>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width:${pct}%"></div>
+            </div>
+          </div>
+          <div class="course-card-footer">
+            <div class="teacher-tag">
+              <div class="teacher-tag-avatar" style="overflow:hidden; padding:0; background:transparent;">
+                <img src="avt.jpg" style="width:100%; height:100%; object-fit:cover; object-position:top;">
+              </div>
+              Cô ${course.teacher}
+            </div>
+            <a href="course.html?id=${course.course_id}" class="btn btn-primary btn-sm">Vào học →</a>
+          </div>
+        </div>
+      `;
+      card.addEventListener('click', (e) => {
+        if (!e.target.closest('a')) window.location.href = `course.html?id=${course.course_id}`;
+      });
+      grid.appendChild(card);
+    });
+
+    return userCourses;
+  } catch (e) {
+    console.error('Error loading courses:', e);
+    return [];
+  }
+}
+
+// ── After loadCourses renders: animate cards ────────────────
+// (animation handled below in init)
+
+// ── Progress from LocalStorage ────────────────────────────────
+function getProgress(courseId, courseData) {
+  const key = `ue_progress_${courseId}`;
+  const completed = JSON.parse(localStorage.getItem(key) || '[]');
+
+  let total = 0;
+  courseData.weeks.forEach(w => w.sessions.forEach(s => { total += s.files.length; }));
+
+  const done = completed.length;
+  const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+  return { pct, done, total };
+}
+
+// ── Weekly Calendar ───────────────────────────────────────────
+function buildCalendar(courses) {
+  const now = new Date();
+  const dayOfWeek = now.getDay(); // 0=Sun
+  const startOfWeek = new Date(now);
+  // Make week start Monday
+  const diff = (dayOfWeek === 0) ? -6 : 1 - dayOfWeek;
+  startOfWeek.setDate(now.getDate() + diff);
+
+  const dayNames = ['T2','T3','T4','T5','T6','T7','CN'];
+  const container = document.getElementById('weekDays');
+  container.innerHTML = '';
+
+  // Collect lesson dates from courses
+  const lessonDates = new Set();
+  if (courses && courses.length) {
+    courses.forEach(c => {
+      c.weeks.forEach(w => {
+        w.sessions.forEach(s => {
+          if (s.date) lessonDates.add(s.date);
+        });
+      });
+    });
+  }
+
+  // Week label
+  const endOfWeek = new Date(startOfWeek);
+  endOfWeek.setDate(startOfWeek.getDate() + 6);
+  document.getElementById('weekLabel').textContent =
+    `T${startOfWeek.getDate()}/${startOfWeek.getMonth()+1} – T${endOfWeek.getDate()}/${endOfWeek.getMonth()+1}`;
+
+  for (let i = 0; i < 7; i++) {
+    const day = new Date(startOfWeek);
+    day.setDate(startOfWeek.getDate() + i);
+    const dateStr = day.toISOString().split('T')[0];
+    const isToday = dateStr === now.toISOString().split('T')[0];
+    const hasClass = lessonDates.has(dateStr);
+
+    const el = document.createElement('div');
+    el.className = 'week-day' + (isToday ? ' today' : '') + (hasClass ? ' has-class' : '');
+    el.innerHTML = `
+      <div class="week-day-label">${dayNames[i]}</div>
+      <div class="week-day-num">${day.getDate()}</div>
+      ${hasClass ? '<div class="week-day-dot"></div>' : ''}
+    `;
+    container.appendChild(el);
+  }
+
+  // Upcoming lessons
+  const upcoming = [];
+  if (courses && courses.length) {
+    courses.forEach(c => {
+      c.weeks.forEach(w => {
+        w.sessions.forEach(s => {
+          if (s.date && s.date >= now.toISOString().split('T')[0]) {
+            upcoming.push({ ...s, courseName: c.title });
+          }
+        });
+      });
+    });
+  }
+  upcoming.sort((a, b) => a.date.localeCompare(b.date));
+
+  const upcomingEl = document.getElementById('upcomingLessons');
+  const nextFew = upcoming.slice(0, 3);
+  if (nextFew.length) {
+    upcomingEl.innerHTML = nextFew.map(l => {
+      const d = new Date(l.date);
+      const dateLabel = d.toLocaleDateString('vi-VN', { weekday:'short', day:'numeric', month:'numeric' });
+      return `
+        <div class="upcoming-item">
+          <div class="upcoming-time">${l.time || '08:00'}</div>
+          <div class="upcoming-info">
+            <div class="upcoming-title">${l.name}</div>
+            <div class="upcoming-date">${dateLabel}</div>
+          </div>
+        </div>`;
+    }).join('');
+  } else {
+    upcomingEl.innerHTML = `<p style="font-size:var(--font-size-xs);color:var(--gray-400);text-align:center;padding:var(--space-4) 0">Không có lịch học sắp tới</p>`;
+  }
+}
+
+// ── Chart.js Doughnut ─────────────────────────────────────────
+let chartInstance = null;
+
+function buildChart(pct) {
+  const ctx = document.getElementById('progressChart').getContext('2d');
+  const done = pct;
+  const left = 100 - done;
+
+  document.getElementById('chartPct').textContent = `${done}%`;
+  document.getElementById('legendDone').textContent = `${done}%`;
+  document.getElementById('legendLeft').textContent = `${left}%`;
+
+  if (chartInstance) chartInstance.destroy();
+  chartInstance = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      datasets: [{
+        data: [done || 0.01, left || 99.99],
+        backgroundColor: [
+          'rgba(36, 81, 209, 0.9)',
+          'rgba(229, 231, 235, 0.7)'
+        ],
+        borderWidth: 0,
+        hoverOffset: 4
+      }]
+    },
+    options: {
+      cutout: '75%',
+      responsive: false,
+      plugins: { legend: { display: false }, tooltip: { enabled: false } },
+      animation: { animateRotate: true, duration: 800 }
+    }
+  });
+}
+
+// ── Init ──────────────────────────────────────────────────────
+(async function init() {
+  const courses = await loadCourses();
+  // Animate course cards after render
+  if (typeof window.animateCourseCards === 'function') window.animateCourseCards();
+  // Animate progress bars
+  if (typeof window.animateProgressBars === 'function') setTimeout(window.animateProgressBars, 300);
+
+  buildCalendar(courses);
+  // Animate calendar after building
+  if (typeof window.animateCalendar === 'function') window.animateCalendar();
+
+  // Compute total progress across all courses
+  let totalFiles = 0, doneFiles = 0;
+  courses.forEach(c => {
+    const p = getProgress(c.course_id, c);
+    totalFiles += p.total;
+    doneFiles  += p.done;
+  });
+  const overallPct = totalFiles > 0 ? Math.round((doneFiles / totalFiles) * 100) : 0;
+
+  buildChart(overallPct);
+  // Animate chart counter
+  if (typeof window.animateChart === 'function') window.animateChart(overallPct);
+
+  if (courses.length > 0) {
+    document.getElementById('progressCourse').textContent =
+      `${doneFiles} / ${totalFiles} bài học hoàn thành`;
+  }
+})();
+
+// ── Toast ─────────────────────────────────────────────────────
+function showToast(type, msg) {
+  const tc = document.getElementById('toastContainer');
+  const t = document.createElement('div');
+  t.className = `toast ${type}`;
+  t.innerHTML = `<span>${type === 'success' ? '✅' : 'ℹ️'}</span><span class="toast-msg">${msg}</span>`;
+  tc.appendChild(t);
+  setTimeout(() => t.remove(), 4000);
+}
+</script>
+
+<!-- GSAP Dashboard Animations -->
+<script src="js/gsap-dashboard.js"></script>
+
+</body>
+</html>

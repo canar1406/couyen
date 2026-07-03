@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Khóa Học – Uyên English</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="description" content="Chi tiết lộ trình học tập, tài liệu và video bài giảng." />
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/course.css" />
+  <link rel="stylesheet" href="css/enhancements.css" />
+  <!-- GSAP CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body>
+
+<div class="app-layout" style="height:100vh;overflow:hidden">
+
+  <!-- ── App Sidebar (Main Nav) ─────────────────────────────── -->
+  <aside class="sidebar" id="mainSidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon">UE</div>
+      <div class="sidebar-logo-text">
+        <span class="brand-name">Uyên English</span>
+        <span class="brand-sub">Học Tiếng Anh Online</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Chính</div>
+      <a href="dashboard.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Trang chủ
+      </a>
+      <a href="course.html" class="nav-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+        Khóa học của tôi
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-card">
+        <div class="user-avatar" id="sidebarAvatar">?</div>
+        <div class="user-info">
+          <div class="user-name" id="sidebarName">Học viên</div>
+          <div class="user-role" id="sidebarRole">Đang học</div>
+        </div>
+      </div>
+      <button class="nav-item" id="logoutBtn" style="width:100%;margin-top:var(--space-2);color:rgba(255,80,80,.7)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Đăng xuất
+      </button>
+    </div>
+  </aside>
+
+  <!-- ── Main Content ──────────────────────────────────────── -->
+  <div class="main-content" style="overflow:hidden">
+
+    <!-- Top progress bar -->
+    <div class="course-progress-bar" id="courseProgressBar">
+      <div class="course-title-bar" id="courseNameBar">Đang tải...</div>
+      <div class="course-progress-wrap">
+        <div class="course-pct-text" id="coursePctText">0%</div>
+        <div class="progress-bar"><div class="progress-fill" id="courseProgressFill" style="width:0%"></div></div>
+      </div>
+      <button class="btn btn-outline btn-sm" onclick="window.location.href='dashboard.html'">← Quay lại</button>
+    </div>
+
+    <!-- Course Layout -->
+    <div class="course-layout" style="height:calc(100vh - 60px - 56px)">
+
+      <!-- ── Course TOC Sidebar ──────────────────────────── -->
+      <div class="course-sidebar" id="courseSidebar">
+        <div class="course-sidebar-header">
+          <div class="course-sidebar-title" id="tocTitle">Mục lục khóa học</div>
+          <div class="sidebar-progress-info">
+            <span id="tocDone">0 / 0 bài</span>
+            <span class="sidebar-progress-pct" id="tocPct">0%</span>
+          </div>
+          <div class="progress-bar" style="height:4px">
+            <div class="progress-fill" id="tocProgressFill" style="width:0%"></div>
+          </div>
+        </div>
+        <div class="course-toc" id="courseToc">
+          <!-- injected by JS -->
+        </div>
+      </div>
+
+      <!-- ── Content Area ───────────────────────────────── -->
+      <div class="course-content-area" id="contentArea">
+        <!-- Topbar -->
+        <div class="topbar" style="position:sticky;top:0;z-index:50">
+          <button class="topbar-btn" id="tocToggle" aria-label="Toggle TOC">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </button>
+          <div class="topbar-title" id="currentFileTitle">Chọn bài học để bắt đầu</div>
+          <div class="topbar-actions">
+            <button class="topbar-btn" id="prevBtn" title="Bài trước">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="topbar-btn" id="nextBtn" title="Bài tiếp">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Content Panel -->
+        <div class="content-panel" id="contentPanel" style="padding: 0; display: flex; flex-direction: column; overflow: hidden; height: 100%;">
+
+          <!-- Welcome screen (default) -->
+          <div class="welcome-screen" id="welcomeScreen" style="display:block; padding:0; height:100%; text-align:left; overflow-y:auto; background:#fff">
+            
+            <!-- Banner -->
+            <div style="width:100%; height: 260px; background: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') center/cover; position: relative;">
+               <div style="position: absolute; inset:0; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);"></div>
+               <div style="position: absolute; bottom: 0; left: 0; padding: var(--space-6) var(--space-10);">
+                  <div class="welcome-title" id="welcomeTitle" style="color: white; text-align: left; margin: 0; font-size: 2rem; letter-spacing: -0.02em;">Đang tải...</div>
+                  <p class="welcome-desc" id="welcomeDesc" style="color: rgba(255,255,255,0.85); text-align: left; margin-top: var(--space-2); max-width: 600px; font-size: var(--font-size-sm); line-height: 1.5;"></p>
+               </div>
+            </div>
+
+            <div style="max-width:1200px; margin: 0 auto; padding: 0 var(--space-10);">
+                <!-- Content -->
+                <div style="padding: var(--space-6) 0 var(--space-12);">
+                  <div class="lesson-list-title" style="text-align: left; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 1.15rem; font-weight: 800; color: var(--gray-900);">Danh sách bài học</span>
+                    <span class="lesson-count-badge" id="totalBadge" style="background: #e0e7ff; color: #3730a3; padding: 6px 14px; border-radius: 20px; font-weight: 700; font-size: 0.75rem;">0 bài</span>
+                  </div>
+                  <div id="flatLessonList"></div>
+                </div>
+            </div>
+          </div>
+
+          <!-- Active content (hidden until file selected) -->
+          <div id="activeContent" style="display:none; padding: var(--space-6) var(--space-8); height: 100%; overflow-y: auto;">
+            <div class="file-info-card" id="fileInfoCard">
+              <div class="file-info-left">
+                <div class="file-info-icon" id="fileInfoIcon"></div>
+                <div>
+                  <div class="file-info-title" id="fileInfoTitle"></div>
+                  <div class="file-info-meta" id="fileInfoMeta"></div>
+                </div>
+              </div>
+              <div style="display:flex;gap:var(--space-3)">
+                <span class="badge badge-green" id="completedBadge" style="display:none">✅ Đã hoàn thành</span>
+                <a id="driveOpenBtn" href="#" target="_blank" class="btn btn-outline btn-sm">Mở Google Drive ↗</a>
+              </div>
+            </div>
+
+            <!-- Video viewer -->
+            <div class="media-viewer" id="videoViewer" style="display:none">
+              <div class="media-viewer-placeholder" id="videoPlaceholder">
+                <div class="placeholder-icon">▶️</div>
+                <div class="placeholder-text">Nhấn vào bài học để xem video</div>
+              </div>
+              <iframe
+                id="videoFrame"
+                allowfullscreen
+                allow="autoplay; encrypted-media"
+                style="display:none"
+              ></iframe>
+            </div>
+
+            <!-- PDF viewer -->
+            <div class="pdf-viewer" id="pdfViewer" style="display:none">
+              <iframe id="pdfFrame" allowfullscreen></iframe>
+            </div>
+
+            <!-- Lesson nav -->
+            <div class="lesson-nav">
+              <button class="btn btn-outline" id="prevFileBtn">← Bài trước</button>
+              <div class="lesson-nav-current" id="lessonNavCurrent"></div>
+              <button class="btn btn-primary" id="nextFileBtn">Bài tiếp →</button>
+            </div>
+          </div>
+
+        </div><!-- end content-panel -->
+      </div><!-- end course-content-area -->
+
+    </div><!-- end course-layout -->
+  </div><!-- end main-content -->
+</div><!-- end app-layout -->
+
+<!-- Toast -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script>
+// ============================================================
+//  course.js – inline
+//  Reads course structure directly from course-data.json
+// ============================================================
+
+// ── Auth Guard ────────────────────────────────────────────────
+const rawUser = localStorage.getItem('ue_user') || sessionStorage.getItem('ue_user');
+if (!rawUser) { window.location.href = 'login.html'; }
+const currentUser = JSON.parse(rawUser);
+
+const avt = currentUser.avatar || currentUser.name.charAt(0);
+if (avt.includes('.jpg') || avt.includes('.png')) {
+  document.getElementById('sidebarAvatar').innerHTML = `<img src="${avt}" style="width:100%;height:100%;object-fit:cover;object-position:top;border-radius:50%">`;
+  document.getElementById('sidebarAvatar').style.background = 'transparent';
+} else {
+  document.getElementById('sidebarAvatar').textContent = avt;
+}
+document.getElementById('sidebarName').textContent = currentUser.name;
+document.getElementById('sidebarRole').textContent =
+  currentUser.role === 'admin' ? '👑 Admin' : '🎓 Học viên';
+
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  localStorage.removeItem('ue_user');
+  sessionStorage.removeItem('ue_user');
+  window.location.href = 'login.html';
+});
+
+// ── State ─────────────────────────────────────────────────────
+let courseData = null;
+let allFiles   = [];   // flat list of all files in order
+let currentFileIndex = -1;
+let completedSet = new Set();
+const COURSE_ID = new URLSearchParams(location.search).get('id') || 'english-basic';
+const PROGRESS_KEY = `ue_progress_${COURSE_ID}`;
+
+// ── Load & Render ─────────────────────────────────────────────
+async function init() {
+  let allCourses = [];
+  try {
+    const res = await fetch(`data/course-data-${currentUser.id}.json`);
+    allCourses = await res.json();
+  } catch (err) {
+    console.warn('Local fetch failed, using fallback data:', err);
+    allCourses = [{"course_id":"english-basic","title":"Tiếng Anh Nền Tảng – Cô Nhã Uyên","subtitle":"Ngữ pháp cơ bản, Từ vựng & Kỹ năng làm bài thi","teacher":"Phạm Nhã Uyên","rating":5.0,"reviews":24,"weeks":[{"week_id":"w1","name":"Tuần 1 – Nền Tảng Ngữ Pháp","sessions":[{"session_id":"w1s1","name":"Buổi 1 – Thì Hiện Tại Đơn & Hiện Tại Tiếp Diễn","date":"2026-07-05","time":"08:00","files":[{"file_id":"w1s1f1","type":"video","name":"Video bài giảng – Thì Hiện Tại","drive_id":"1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"},{"file_id":"w1s1f2","type":"pdf","name":"Slide bài giảng – Thì Hiện Tại","drive_id":"1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"},{"file_id":"w1s1f3","type":"pdf","name":"Bài tập về nhà – Buổi 1","drive_id":"1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"}]},{"session_id":"w1s2","name":"Buổi 2 – Thì Quá Khứ Đơn & Quá Khứ Tiếp Diễn","date":"2026-07-08","time":"08:00","files":[{"file_id":"w1s2f1","type":"video","name":"Video bài giảng – Thì Quá Khứ","drive_id":"1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"},{"file_id":"w1s2f2","type":"pdf","name":"Slide bài giảng – Thì Quá Khứ","drive_id":"1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"},{"file_id":"w1s2f3","type":"pdf","name":"Bài tập về nhà – Buổi 2","drive_id":"1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"}]}]},{"week_id":"w2","name":"Tuần 2 – Từ Vựng & Phrasal Verbs","sessions":[{"session_id":"w2s1","name":"Buổi 3 – Phrasal Verbs Thông Dụng (Phần 1)","date":"2026-07-12","time":"08:00","files":[{"file_id":"w2s1f1","type":"video","name":"Video bài giảng – Phrasal Verbs P1","drive_id":"1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"},{"file_id":"w2s1f2","type":"pdf","name":"Danh sách 50 Phrasal Verbs cơ bản","drive_id":"1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"}]},{"session_id":"w2s2","name":"Buổi 4 – Idioms & Expressions Thường Gặp","date":"2026-07-15","time":"08:00","files":[{"file_id":"w2s2f1","type":"video","name":"Video bài giảng – Idioms","drive_id":"1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"},{"file_id":"w2s2f2","type":"pdf","name":"Tổng hợp Idioms theo chủ đề","drive_id":"1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"},{"file_id":"w2s2f3","type":"pdf","name":"Bài tập tổng hợp Tuần 2","drive_id":"1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"}]}]},{"week_id":"w3","name":"Tuần 3 – Kỹ Năng Làm Bài Thi","sessions":[{"session_id":"w3s1","name":"Buổi 5 – Kỹ Năng Đọc Hiểu (Reading)","date":"2026-07-19","time":"08:00","files":[{"file_id":"w3s1f1","type":"video","name":"Video – Phương pháp đọc hiểu nhanh","drive_id":"1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"},{"file_id":"w3s1f2","type":"pdf","name":"Đề luyện tập Reading – Số 1","drive_id":"1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"}]},{"session_id":"w3s2","name":"Buổi 6 – Kỹ Năng Viết (Writing Basics)","date":"2026-07-22","time":"08:00","files":[{"file_id":"w3s2f1","type":"video","name":"Video – Cấu trúc câu & Viết đoạn văn","drive_id":"1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"},{"file_id":"w3s2f2","type":"pdf","name":"Template các dạng bài viết thường gặp","drive_id":"1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"},{"file_id":"w3s2f3","type":"pdf","name":"Bài tập Writing thực hành – Buổi 6","drive_id":"1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"}]}]}]}];
+  }
+
+  try {
+    courseData = allCourses.find(c => c.course_id === COURSE_ID);
+
+    if (!courseData) {
+      document.getElementById('welcomeTitle').textContent = 'Không tìm thấy khóa học';
+      document.getElementById('welcomeDesc').textContent = 'ID khóa học không hợp lệ.';
+      return;
+    }
+
+    // Load progress
+    completedSet = new Set(JSON.parse(localStorage.getItem(PROGRESS_KEY) || '[]'));
+
+    // Build flat file list
+    allFiles = [];
+    courseData.weeks.forEach((w, wi) => {
+      w.sessions.forEach((s, si) => {
+        s.files.forEach((f, fi) => {
+          allFiles.push({ ...f, weekIndex: wi, sessionIndex: si, fileIndex: fi,
+                          weekName: w.name, sessionName: s.name });
+        });
+      });
+    });
+
+    // Update top bar
+    document.getElementById('courseNameBar').textContent = courseData.title;
+    document.getElementById('welcomeTitle').textContent = courseData.title;
+    document.getElementById('welcomeDesc').textContent =
+      `${courseData.subtitle} · Chọn bài học bên trái để bắt đầu.`;
+    document.getElementById('totalBadge').textContent = `${allFiles.length} bài`;
+
+    // Render TOC
+    renderTOC();
+    updateProgress();
+    renderFlatList();
+
+  } catch (err) {
+    console.error('Failed to load course:', err);
+    document.getElementById('welcomeTitle').textContent = 'Lỗi tải dữ liệu';
+    document.getElementById('welcomeDesc').textContent = 'Không thể đọc file course-data.json. Hãy kiểm tra lại.';
+  }
+}
+
+// ── Render TOC ────────────────────────────────────────────────
+function renderTOC() {
+  const toc = document.getElementById('courseToc');
+  toc.innerHTML = '';
+  document.getElementById('tocTitle').textContent = courseData.title;
+
+  let fileGlobalIdx = 0;
+
+  courseData.weeks.forEach((week, wi) => {
+    const weekCompleted = week.sessions.every(s =>
+      s.files.every(f => completedSet.has(f.file_id))
+    );
+
+    const weekEl = document.createElement('div');
+    weekEl.className = 'week-group';
+
+    const weekHeader = document.createElement('div');
+    weekHeader.className = 'week-header';
+    weekHeader.dataset.weekIndex = wi;
+
+    const totalInWeek = week.sessions.reduce((s, ss) => s + ss.files.length, 0);
+    const doneInWeek  = week.sessions.reduce((s, ss) =>
+      s + ss.files.filter(f => completedSet.has(f.file_id)).length, 0);
+
+    weekHeader.innerHTML = `
+      <svg class="week-chevron open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      <span class="week-header-title">${week.name}</span>
+      <span class="week-count">${doneInWeek}/${totalInWeek}</span>
+    `;
+
+    const weekBody = document.createElement('div');
+    weekBody.className = 'week-body';
+    weekBody.id = `week-body-${wi}`;
+
+    weekHeader.addEventListener('click', () => {
+      const chevron = weekHeader.querySelector('.week-chevron');
+      const isOpen = chevron.classList.contains('open');
+      weekBody.style.maxHeight = isOpen ? '0' : weekBody.scrollHeight + 'px';
+      chevron.classList.toggle('open', !isOpen);
+    });
+
+    week.sessions.forEach((session, si) => {
+      const sessionEl = document.createElement('div');
+      sessionEl.className = 'session-group';
+
+      const sessCompleted = session.files.every(f => completedSet.has(f.file_id));
+
+      const sessHeader = document.createElement('div');
+      sessHeader.className = 'session-header';
+      sessHeader.innerHTML = `
+        <svg class="session-chevron open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        <span class="session-icon">📋</span>
+        <span class="session-header-title">${session.name}</span>
+      `;
+
+      const sessBody = document.createElement('div');
+      sessBody.className = 'session-body';
+      sessBody.id = `sess-body-${wi}-${si}`;
+
+      sessHeader.addEventListener('click', () => {
+        const chevron = sessHeader.querySelector('.session-chevron');
+        const isOpen = chevron.classList.contains('open');
+        sessBody.style.maxHeight = isOpen ? '0' : sessBody.scrollHeight + 'px';
+        chevron.classList.toggle('open', !isOpen);
+      });
+
+      session.files.forEach((file, fi) => {
+        const gIdx = fileGlobalIdx++;
+        const isDone = completedSet.has(file.file_id);
+
+        const fileEl = document.createElement('div');
+        fileEl.className = 'file-item';
+        fileEl.dataset.globalIndex = gIdx;
+        fileEl.id = `file-item-${file.file_id}`;
+
+        const typeInfo = getFileTypeInfo(file.type);
+
+        fileEl.innerHTML = `
+          <div class="file-type-icon file-type-${file.type}" title="${typeInfo.label}">${typeInfo.icon}</div>
+          <div class="file-info">
+            <div class="file-name">${file.name}</div>
+            <div class="file-meta">${typeInfo.label}${file.size ? ' · ' + file.size : ''}</div>
+          </div>
+          <div class="file-status ${isDone ? 'completed' : 'pending'}" id="status-${file.file_id}"></div>
+        `;
+
+        fileEl.addEventListener('click', () => openFile(gIdx));
+        sessBody.appendChild(fileEl);
+      });
+
+      sessHeader.click; // expanded by default
+      sessionEl.appendChild(sessHeader);
+      sessionEl.appendChild(sessBody);
+      weekBody.appendChild(sessionEl);
+    });
+
+    // Open all by default – set max-height after appending
+    weekEl.appendChild(weekHeader);
+    weekEl.appendChild(weekBody);
+    toc.appendChild(weekEl);
+
+    // Init heights
+    requestAnimationFrame(() => {
+      weekBody.style.maxHeight = weekBody.scrollHeight + 'px';
+      weekBody.querySelectorAll('.session-body').forEach(sb => {
+        sb.style.maxHeight = sb.scrollHeight + 'px';
+      });
+    });
+  });
+}
+
+function getFileTypeInfo(type) {
+  switch(type) {
+    case 'video': return { icon: '▶', label: 'Video bài giảng' };
+    case 'pdf':   return { icon: '📄', label: 'Tài liệu PDF' };
+    case 'doc':   return { icon: '📝', label: 'Tài liệu Word' };
+    default:      return { icon: '📎', label: 'Tài liệu' };
+  }
+}
+
+// ── Render Flat List on Welcome Screen ───────────────────────
+function renderFlatList() {
+  const container = document.getElementById('flatLessonList');
+  container.innerHTML = '';
+  container.style.cssText = `
+    background: #fff;
+    border-radius: var(--radius-xl);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    border: 1px solid var(--gray-200);
+    overflow: hidden;
+    margin-top: var(--space-6);
+  `;
+
+  courseData.weeks.forEach((w, wi) => {
+    const weekEl = document.createElement('div');
+    if (wi < courseData.weeks.length - 1) {
+      weekEl.style.borderBottom = '1px solid var(--gray-100)';
+    }
+
+    const weekHeader = document.createElement('div');
+    weekHeader.style.cssText = `
+      background: #f8fafc;
+      padding: var(--space-4) var(--space-5);
+      font-size: var(--font-size-sm);
+      font-weight: 700;
+      color: var(--primary-700);
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    `;
+    weekHeader.innerHTML = `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:16px;height:16px;transform:rotate(90deg)"><polyline points="9 18 15 12 9 6"/></svg>
+      ${w.name}
+    `;
+
+    const weekBody = document.createElement('div');
+    weekBody.style.cssText = `padding: var(--space-5) var(--space-5); background: #fff;`;
+
+    w.sessions.forEach((s, si) => {
+      const sessEl = document.createElement('div');
+      sessEl.style.cssText = `
+        border: 1px solid var(--primary-100);
+        border-radius: var(--radius-lg);
+        margin-bottom: var(--space-4);
+        overflow: hidden;
+      `;
+      if (si === w.sessions.length - 1) sessEl.style.marginBottom = '0';
+
+      const sessHeader = document.createElement('div');
+      sessHeader.style.cssText = `
+        background: #f0f7ff;
+        padding: var(--space-3) var(--space-4);
+        font-size: var(--font-size-xs);
+        font-weight: 700;
+        color: var(--primary-800);
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+        border-bottom: 1px solid var(--primary-100);
+      `;
+      sessHeader.innerHTML = `<span style="color:var(--primary-500);font-size:1.1rem;line-height:0">▾</span> ${s.name}`;
+
+      const sessBody = document.createElement('div');
+      sessBody.style.cssText = `padding: var(--space-2);`;
+
+      s.files.forEach((f, fi) => {
+        const globalIdx = allFiles.findIndex(af => af.file_id === f.file_id);
+        const done = completedSet.has(f.file_id);
+        const ti = getFileTypeInfo(f.type);
+
+        const row = document.createElement('div');
+        row.style.cssText = `
+          display: flex;
+          align-items: center;
+          gap: var(--space-3);
+          padding: var(--space-3) var(--space-4);
+          border-radius: var(--radius-md);
+          cursor: pointer;
+          transition: all var(--transition-fast);
+          margin-bottom: 2px;
+        `;
+        row.innerHTML = `
+          <div style="width:20px;height:20px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.7rem;
+            ${done ? 'background:var(--success-500);color:#fff' : 'border:2px solid var(--gray-300);color:transparent'}">
+            ${done ? '✓' : ''}
+          </div>
+          <div style="font-weight:700;font-size:.65rem;color:var(--success-600);white-space:nowrap">[${ti.label}]</div>
+          <div style="flex:1;font-size:var(--font-size-sm);font-weight:600;color:var(--gray-700)">${f.name}</div>
+          <div class="arrow-btn" style="width:28px;height:28px;border-radius:var(--radius-sm);background:var(--gray-50);border:1px solid var(--gray-200);display:flex;align-items:center;justify-content:center;color:var(--gray-500);transition:all var(--transition-fast)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </div>
+        `;
+        row.addEventListener('mouseenter', () => { 
+          row.style.background = 'var(--primary-50)'; 
+          const btn = row.querySelector('.arrow-btn');
+          btn.style.background = 'var(--primary-500)';
+          btn.style.color = '#fff';
+          btn.style.borderColor = 'var(--primary-500)';
+        });
+        row.addEventListener('mouseleave', () => { 
+          row.style.background = ''; 
+          const btn = row.querySelector('.arrow-btn');
+          btn.style.background = 'var(--gray-50)';
+          btn.style.color = 'var(--gray-500)';
+          btn.style.borderColor = 'var(--gray-200)';
+        });
+        row.addEventListener('click', () => openFile(globalIdx));
+        sessBody.appendChild(row);
+      });
+
+      sessEl.appendChild(sessHeader);
+      sessEl.appendChild(sessBody);
+      weekBody.appendChild(sessEl);
+    });
+
+    weekEl.appendChild(weekHeader);
+    weekEl.appendChild(weekBody);
+    container.appendChild(weekEl);
+  });
+}
+
+// ── Open a File ───────────────────────────────────────────────
+function openFile(globalIdx) {
+  if (globalIdx < 0 || globalIdx >= allFiles.length) return;
+  currentFileIndex = globalIdx;
+
+  const file = allFiles[globalIdx];
+
+  // Mark completed
+  markCompleted(file.file_id);
+
+  // Switch view with GSAP crossfade
+  document.getElementById('welcomeScreen').style.display = 'none';
+  document.getElementById('activeContent').style.display = 'block';
+  if (typeof window.animateContentIn === 'function') window.animateContentIn();
+  if (typeof window.animateNavTransition === 'function') {
+    window.animateNavTransition(globalIdx > (currentFileIndex || 0) ? 1 : -1);
+  }
+
+  // Highlight TOC item
+  document.querySelectorAll('.file-item').forEach(el => el.classList.remove('active'));
+  const tocItem = document.getElementById(`file-item-${file.file_id}`);
+  if (tocItem) {
+    tocItem.classList.add('active');
+    tocItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  }
+
+  // Update header
+  document.getElementById('currentFileTitle').textContent = file.name;
+
+  // File info card
+  const ti = getFileTypeInfo(file.type);
+  document.getElementById('fileInfoIcon').textContent = ti.icon;
+  document.getElementById('fileInfoIcon').className = `file-info-icon file-type-icon file-type-${file.type}`;
+  document.getElementById('fileInfoTitle').textContent = file.name;
+  document.getElementById('fileInfoMeta').textContent =
+    `${ti.label}${file.size ? ' · ' + file.size : ''} · ${file.weekName} · ${file.sessionName}`;
+  document.getElementById('completedBadge').style.display = completedSet.has(file.file_id) ? 'inline-flex' : 'none';
+
+  // Drive link
+  const driveUrl = `https://drive.google.com/file/d/${file.drive_id}/view`;
+  document.getElementById('driveOpenBtn').href = driveUrl;
+
+  // Render media
+  renderMedia(file);
+
+  // Nav
+  document.getElementById('lessonNavCurrent').textContent =
+    `Bài ${globalIdx + 1} / ${allFiles.length}`;
+  document.getElementById('prevFileBtn').disabled = globalIdx === 0;
+  document.getElementById('nextFileBtn').disabled = globalIdx === allFiles.length - 1;
+  document.getElementById('prevBtn').disabled = globalIdx === 0;
+  document.getElementById('nextBtn').disabled = globalIdx === allFiles.length - 1;
+}
+
+function renderMedia(file) {
+  const videoViewer = document.getElementById('videoViewer');
+  const pdfViewer   = document.getElementById('pdfViewer');
+  const videoFrame  = document.getElementById('videoFrame');
+  const pdfFrame    = document.getElementById('pdfFrame');
+
+  videoViewer.style.display = 'none';
+  pdfViewer.style.display   = 'none';
+  videoFrame.style.display  = 'none';
+  videoFrame.src = '';
+  pdfFrame.src   = '';
+
+  if (file.type === 'video') {
+    videoViewer.style.display = 'block';
+    // Google Drive embed URL for video
+    const embedUrl = `https://drive.google.com/file/d/${file.drive_id}/preview`;
+    videoFrame.src = embedUrl;
+    videoFrame.style.display = 'block';
+    document.getElementById('videoPlaceholder').style.display = 'none';
+  } else if (file.type === 'pdf' || file.type === 'doc') {
+    pdfViewer.style.display = 'block';
+    // Google Drive preview for docs/pdf
+    const embedUrl = `https://drive.google.com/file/d/${file.drive_id}/preview`;
+    pdfFrame.src = embedUrl;
+  }
+}
+
+// ── Mark Completed ────────────────────────────────────────────
+function markCompleted(fileId) {
+  if (completedSet.has(fileId)) return;
+  completedSet.add(fileId);
+  localStorage.setItem(PROGRESS_KEY, JSON.stringify([...completedSet]));
+
+  // Update status icon in TOC
+  const statusEl = document.getElementById(`status-${fileId}`);
+  if (statusEl) {
+    statusEl.classList.remove('pending');
+    statusEl.classList.add('completed');
+  }
+
+  updateProgress();
+  // GSAP tick animation
+  if (typeof window.animateCompletedTick === 'function') window.animateCompletedTick(fileId);
+  showToast('success', '✅ Đã ghi nhận hoàn thành bài học!');
+}
+
+// ── Update Progress ───────────────────────────────────────────
+function updateProgress() {
+  const total = allFiles.length;
+  const done  = completedSet.size;
+  const pct   = total > 0 ? Math.round((done / total) * 100) : 0;
+
+  // GSAP animate progress bars
+  if (typeof window.animateProgressBar === 'function') window.animateProgressBar(pct);
+  else {
+    document.getElementById('courseProgressFill').style.width = pct + '%';
+    document.getElementById('coursePctText').textContent = pct + '%';
+    document.getElementById('tocProgressFill').style.width = pct + '%';
+  }
+  document.getElementById('tocDone').textContent = `${done} / ${total} bài`;
+  document.getElementById('tocPct').textContent = pct + '%';
+
+  // Update week counts in TOC headers
+  if (courseData) {
+    courseData.weeks.forEach((w, wi) => {
+      const totalInWeek = w.sessions.reduce((s, ss) => s + ss.files.length, 0);
+      const doneInWeek  = w.sessions.reduce((s, ss) =>
+        s + ss.files.filter(f => completedSet.has(f.file_id)).length, 0);
+      const countEl = document.querySelector(`[data-week-index="${wi}"] .week-count`);
+      if (countEl) countEl.textContent = `${doneInWeek}/${totalInWeek}`;
+    });
+  }
+}
+
+// ── Navigation ────────────────────────────────────────────────
+document.getElementById('nextBtn').addEventListener('click', () => openFile(currentFileIndex + 1));
+document.getElementById('prevBtn').addEventListener('click', () => openFile(currentFileIndex - 1));
+document.getElementById('nextFileBtn').addEventListener('click', () => openFile(currentFileIndex + 1));
+document.getElementById('prevFileBtn').addEventListener('click', () => openFile(currentFileIndex - 1));
+
+// ── TOC Toggle (GSAP-powered) ─────────────────────────────────
+let tocOpen = true;
+document.getElementById('tocToggle').addEventListener('click', () => {
+  tocOpen = !tocOpen;
+  if (typeof window.toggleTOCAnimation === 'function') {
+    window.toggleTOCAnimation(tocOpen);
+  } else {
+    const sidebar = document.getElementById('courseSidebar');
+    sidebar.style.width = tocOpen ? '320px' : '0';
+  }
+});
+
+// ── Toast ─────────────────────────────────────────────────────
+function showToast(type, msg) {
+  const tc = document.getElementById('toastContainer');
+  const t = document.createElement('div');
+  t.className = `toast ${type}`;
+  t.innerHTML = `<span>${type==='success'?'✅':'ℹ️'}</span><span class="toast-msg">${msg}</span>`;
+  tc.appendChild(t);
+  setTimeout(() => t.remove(), 3000);
+}
+
+// ── Init ──────────────────────────────────────────────────────
+async function runInit() {
+  await init();
+  // Animate TOC after render
+  if (typeof window.animateTOC === 'function') window.animateTOC();
+}
+runInit();
+</script>
+
+<!-- GSAP Course Animations -->
+<script src="js/gsap-course.js"></script>
+
+</body>
+</html>

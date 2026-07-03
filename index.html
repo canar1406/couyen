@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luyện Tiếng Anh Cùng Cô Nhã Uyên – Nền Tảng Vững, Điểm Số Cao</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="description" content="Khóa học Tiếng Anh online dành cho học sinh cấp 1, cấp 2. Giáo viên: Phạm Nhã Uyên – IELTS 7.0, ĐGNL 965 điểm. Cam kết cải thiện 20%+ sau 6 tháng." />
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/landing.css" />
+  <link rel="stylesheet" href="css/enhancements.css" />
+  <!-- GSAP & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/TextPlugin.min.js"></script>
+  <!-- Prevent FOUC (Flash of Unstyled Content) -->
+  <script>
+    (function(){
+      emailjs.init("AoPRyLOGRSwXBhPRW");
+    })();
+    document.write('<style>.gsap-fouc { visibility: hidden; }</style>');
+  </script>
+</head>
+<body class="landing-body">
+<!-- Scroll Progress -->
+<div class="scroll-progress" id="scrollProgress"></div>
+<!-- Page Transition Overlay -->
+<div class="page-transition" id="pageTransition"></div>
+<!-- Cursor Glow -->
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- ── Navigation ─────────────────────────────────────────── -->
+<nav class="landing-nav gsap-fouc" id="landingNav">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">UE</div>
+      <span class="nav-logo-text">Uyên English</span>
+    </a>
+    <div class="nav-links">
+      <a href="#features" class="nav-link">Khóa học</a>
+      <a href="#teacher" class="nav-link">Giáo viên</a>
+      <a href="#register" class="nav-link">Đăng ký</a>
+      <a href="login.html" class="btn btn-primary btn-sm">Đăng nhập →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Hero ───────────────────────────────────────────────── -->
+<section class="hero" id="home">
+  <!-- Mesh orbs for parallax -->
+  <div class="mesh-bg">
+    <div class="mesh-orb"></div>
+    <div class="mesh-orb"></div>
+    <div class="mesh-orb"></div>
+  </div>
+  <!-- Particles -->
+  <div class="particles-container" id="particlesContainer"></div>
+  <div class="hero-bg-circles">
+    <div class="hero-circle"></div>
+    <div class="hero-circle"></div>
+    <div class="hero-circle"></div>
+  </div>
+
+  <div class="hero-container">
+    <!-- Left -->
+    <div class="hero-text">
+      <div class="hero-badge gsap-fouc">
+        <div class="hero-badge-dot"></div>
+        Đang nhận học viên mới · 2026
+      </div>
+      <h1 class="hero-title gsap-fouc">
+        Chinh phục <span>Tiếng Anh</span><br/>từ nền tảng vững chắc
+      </h1>
+      <p class="hero-desc gsap-fouc">
+        Học Tiếng Anh bài bản với cô <strong style="color:#fff">Phạm Nhã Uyên</strong> – cựu học sinh chuyên Trần Văn Giàu, IELTS 7.0, ĐGNL 965 điểm. Chương trình linh hoạt, cá nhân hóa theo từng học viên.
+      </p>
+      <div class="hero-stats">
+        <div class="hero-stat gsap-fouc">
+          <div class="hero-stat-num">7.0</div>
+          <div class="hero-stat-label">IELTS Score</div>
+        </div>
+        <div class="hero-stat gsap-fouc">
+          <div class="hero-stat-num">965</div>
+          <div class="hero-stat-label">ĐGNL điểm</div>
+        </div>
+        <div class="hero-stat gsap-fouc">
+          <div class="hero-stat-num">20%+</div>
+          <div class="hero-stat-label">Cải thiện điểm</div>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <a href="#register" class="btn btn-primary btn-lg gsap-fouc">🚀 Đăng ký ngay</a>
+        <a href="#teacher" class="btn btn-lg btn-glass gsap-fouc">Tìm hiểu thêm</a>
+      </div>
+    </div>
+
+    <!-- Right -->
+    <div class="hero-visual">
+      <!-- Float badges -->
+      <div class="float-badge float-badge-1 gsap-fouc">
+        <span class="float-badge-icon">🏆</span>
+        <div class="float-badge-text">IELTS 7.0<small>2 lần đạt</small></div>
+      </div>
+      <div class="float-badge float-badge-2 gsap-fouc">
+        <span class="float-badge-icon">⭐</span>
+        <div class="float-badge-text">Điểm Anh 9.0<small>Kỳ thi THPT</small></div>
+      </div>
+
+      <!-- Teacher Card -->
+      <div class="teacher-card gsap-fouc">
+        <div class="teacher-avatar-wrap">
+          <div class="teacher-avatar-circle" style="overflow:hidden; padding:0; background:transparent;">
+            <img src="avt.jpg" alt="Cô Nhã Uyên" style="width:100%; height:100%; object-fit:cover; object-position: top;">
+          </div>
+          <div class="teacher-badge-ielts">IELTS 7.0</div>
+        </div>
+        <div class="teacher-name">Phạm Nhã Uyên</div>
+        <div class="teacher-title-card">Gia sư Tiếng Anh · Cựu HS Chuyên Trần Văn Giàu</div>
+        <div class="teacher-achievements">
+          <div class="achievement-item">
+            <div class="achievement-icon">📚</div>
+            <div class="achievement-val">12 năm</div>
+            <div class="achievement-label">HS Xuất Sắc</div>
+          </div>
+          <div class="achievement-item">
+            <div class="achievement-icon">🎯</div>
+            <div class="achievement-val">283/300</div>
+            <div class="achievement-label">ĐGNl – Tiếng Anh</div>
+          </div>
+          <div class="achievement-item">
+            <div class="achievement-icon">✏️</div>
+            <div class="achievement-val">9.0</div>
+            <div class="achievement-label">Điểm THPT D01</div>
+          </div>
+          <div class="achievement-item">
+            <div class="achievement-icon">💬</div>
+            <div class="achievement-val">Linh hoạt</div>
+            <div class="achievement-label">Lịch học</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Stats Bar ─────────────────────────────────────────────── -->
+<div class="stats-bar">
+  <div class="stats-bar-container">
+    <div class="stat-item">
+      <div class="stat-item-val">100%</div>
+      <div class="stat-item-label">Cam kết học tập minh bạch</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-item-val">1.5 – 2h</div>
+      <div class="stat-item-label">Mỗi buổi học</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-item-val">6 tháng</div>
+      <div class="stat-item-label">Cải thiện 20%+ điểm số</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-item-val">Linh hoạt</div>
+      <div class="stat-item-label">Theo lịch học viên</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Features ─────────────────────────────────────────────── -->
+<section class="section" id="features">
+  <div class="section-container">
+    <div class="section-header">
+      <div class="section-tag">Nội dung khóa học</div>
+      <h2 class="section-title">Học đúng – Học đủ – <span>Học hiệu quả</span></h2>
+      <p class="section-desc">Chương trình được thiết kế linh hoạt, phù hợp với từng học viên từ cấp 1 đến cấp 2, hoặc cần xây dựng lại nền tảng.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon feature-icon-blue">📖</div>
+        <div class="feature-title">Ngữ pháp cơ bản chuyên sâu</div>
+        <div class="feature-desc">Hệ thống ngữ pháp từ cơ bản đến nâng cao: các thì động từ, câu điều kiện, mệnh đề quan hệ... Giải thích rõ ràng, dễ nhớ.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon feature-icon-cyan">💡</div>
+        <div class="feature-title">Phrasal Verbs & Idioms</div>
+        <div class="feature-desc">Học từ vựng thực tế qua phrasal verbs và idioms thường gặp trong đề thi. Có ví dụ minh họa và bài tập áp dụng ngay.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon feature-icon-green">✅</div>
+        <div class="feature-title">Kỹ năng làm bài thi</div>
+        <div class="feature-desc">Chiến lược làm bài Reading, Writing hiệu quả. Phân tích dạng câu hỏi thường gặp và cách xử lý từng loại bài.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon feature-icon-purple">📝</div>
+        <div class="feature-title">Bài tập có chấm & sửa</div>
+        <div class="feature-desc">Bài tập sau mỗi buổi học có hướng dẫn giải chi tiết. Học viên được sửa bài và đặt câu hỏi thoải mái sau giờ học.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon feature-icon-orange">🗓️</div>
+        <div class="feature-title">Lịch học linh hoạt</div>
+        <div class="feature-desc">Lịch học được sắp xếp theo lịch của học viên. Cô luôn cố gắng điều chỉnh để phù hợp với thời gian của từng bạn.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon feature-icon-pink">💰</div>
+        <div class="feature-title">Học phí deal được</div>
+        <div class="feature-desc">Học phí có thể thương lượng tuỳ theo hoàn cảnh. Cam kết minh bạch về tài chính, không phát sinh chi phí ẩn.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Teacher Profile ───────────────────────────────────────── -->
+<section class="section section-alt" id="teacher">
+  <div class="section-container">
+    <div class="achievements-layout">
+      <!-- Left text -->
+      <div class="achievements-text">
+        <div class="section-tag">Về giáo viên</div>
+        <h2 class="section-title" style="text-align:left;font-size:2rem">
+          Cô <span>Phạm Nhã Uyên</span>
+        </h2>
+        <p style="color:var(--gray-500);font-size:var(--font-size-sm);line-height:1.8;margin-bottom:var(--space-5)">
+          Cựu học sinh trường THPT Chuyên Trần Văn Giàu – một trong những trường chuyên hàng đầu TP.HCM. Với 12 năm (24 học kỳ) liên tiếp đạt danh hiệu học sinh xuất sắc, điểm Tiếng Anh luôn trên 9.5.
+        </p>
+        <div class="achievements-list">
+          <div class="achievement-row">
+            <div class="achievement-row-icon">🏫</div>
+            <div>
+              <div class="achievement-row-title">Cựu HS Chuyên Trần Văn Giàu</div>
+              <div class="achievement-row-desc">12 năm liên tiếp học sinh xuất sắc, điểm Tiếng Anh 9.5+ mỗi học kỳ</div>
+            </div>
+          </div>
+          <div class="achievement-row">
+            <div class="achievement-row-icon">🌏</div>
+            <div>
+              <div class="achievement-row-title">IELTS 7.0 – Đạt 2 lần</div>
+              <div class="achievement-row-desc">Lần 1: L=8.0, R=8.0, W=6.5, S=5.5 · Lần 2: R=8.5, L=7.0, W=6.5, S=6.0</div>
+            </div>
+          </div>
+          <div class="achievement-row">
+            <div class="achievement-row-icon">🎓</div>
+            <div>
+              <div class="achievement-row-title">ĐGNL 965/1200 điểm</div>
+              <div class="achievement-row-desc">Điểm Tiếng Anh đạt 283/300 – trong top cao nhất</div>
+            </div>
+          </div>
+          <div class="achievement-row">
+            <div class="achievement-row-icon">📊</div>
+            <div>
+              <div class="achievement-row-title">THPT 26 điểm tổ hợp D01</div>
+              <div class="achievement-row-desc">Điểm Tiếng Anh kỳ thi THPT đạt 9.0</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right card -->
+      <div class="scores-card">
+        <div class="scores-card-title">📋 Bảng điểm chi tiết</div>
+        <div class="score-row">
+          <span class="score-label">IELTS (Lần 1) – Listening</span>
+          <span class="score-val">8.0</span>
+        </div>
+        <div class="score-row">
+          <span class="score-label">IELTS (Lần 1) – Reading</span>
+          <span class="score-val">8.0</span>
+        </div>
+        <div class="score-row">
+          <span class="score-label">IELTS (Lần 2) – Reading</span>
+          <span class="score-val">8.5</span>
+        </div>
+        <div class="score-row">
+          <span class="score-label">IELTS Overall (Lần 2)</span>
+          <span class="score-val">7.0</span>
+        </div>
+        <div class="score-row">
+          <span class="score-label">ĐGNL – Tiếng Anh</span>
+          <span class="score-val">283 / 300</span>
+        </div>
+        <div class="score-row">
+          <span class="score-label">ĐGNL – Tổng điểm</span>
+          <span class="score-val">965 / 1200</span>
+        </div>
+        <div class="score-row">
+          <span class="score-label">THPT – Tiếng Anh</span>
+          <span class="score-val">9.0 / 10</span>
+        </div>
+        <div class="score-row">
+          <span class="score-label">THPT – Tổ hợp D01</span>
+          <span class="score-val">26.0 / 30</span>
+        </div>
+        <div style="margin-top:var(--space-6);padding:var(--space-4);background:rgba(255,255,255,.08);border-radius:var(--radius-lg);border:1px solid rgba(255,255,255,.12)">
+          <div style="font-size:var(--font-size-xs);color:rgba(255,255,255,.5);margin-bottom:var(--space-2)">CAM KẾT CỦA GIÁO VIÊN</div>
+          <div style="font-size:var(--font-size-sm);color:rgba(255,255,255,.85);line-height:1.7">
+            ✓ Cải thiện điểm số 20%+ sau 6 tháng học<br/>
+            ✓ Minh bạch về tiền bạc & thời gian<br/>
+            ✓ Học viên có thể hỏi bài thoải mái sau giờ học
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Register Form ─────────────────────────────────────────── -->
+<section class="register-section" id="register">
+  <div class="register-container">
+    <div class="section-header" style="margin-bottom:var(--space-8)">
+      <div class="section-tag" style="background:rgba(255,255,255,.15);color:rgba(255,255,255,.9)">Đăng ký</div>
+      <h2 class="section-title" style="color:#fff">Bắt đầu hành trình học tập</h2>
+      <p class="section-desc" style="color:rgba(255,255,255,.6)">Điền thông tin bên dưới, cô Uyên sẽ liên hệ với bạn trong vòng 24 giờ.</p>
+    </div>
+    <div class="register-card">
+      <div id="registerSuccess" style="display:none;text-align:center;padding:var(--space-8) 0">
+        <div style="font-size:3rem;margin-bottom:var(--space-4)">🎉</div>
+        <h3 style="color:#fff;font-size:var(--font-size-xl);font-weight:700;margin-bottom:var(--space-3)">Đăng ký thành công!</h3>
+        <p style="color:rgba(255,255,255,.65);font-size:var(--font-size-sm)">Cô Uyên sẽ liên hệ với bạn trong vòng 24 giờ. Cảm ơn bạn đã tin tưởng! 💙</p>
+      </div>
+      <form class="register-form" id="registerForm">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4)">
+          <div class="form-group">
+            <label class="form-label" for="regName">Họ và tên *</label>
+            <input type="text" id="regName" class="form-input" placeholder="Nguyễn Văn A" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="regPhone">Số điện thoại *</label>
+            <input type="tel" id="regPhone" class="form-input" placeholder="0901 234 567" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="regEmail">Email *</label>
+          <input type="email" id="regEmail" class="form-input" placeholder="email@gmail.com" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="regCourse">Khóa học muốn đăng ký *</label>
+          <select id="regCourse" class="form-input" required>
+            <option value="" disabled selected>Chọn khóa học...</option>
+            <option value="english-basic">Tiếng Anh Nền Tảng (Cấp 1 - Cấp 2)</option>
+            <option value="english-grammar">Ngữ Pháp Chuyên Sâu</option>
+            <option value="english-vocab">Từ Vựng & Phrasal Verbs</option>
+            <option value="english-exam">Luyện Thi – Kỹ Năng Làm Bài</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="regNote">Ghi chú thêm (tùy chọn)</label>
+          <textarea id="regNote" class="form-input" rows="3" placeholder="Mục tiêu học tập, thời gian rảnh, hoặc yêu cầu đặc biệt..."></textarea>
+        </div>
+        <button type="submit" class="btn-register" id="registerBtn">
+          Gửi đăng ký →
+        </button>
+        <p style="text-align:center;font-size:var(--font-size-xs);color:rgba(255,255,255,.4);margin-top:var(--space-4)">
+          Thông tin của bạn được bảo mật tuyệt đối và chỉ dùng để liên hệ học tập.
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ─────────────────────────────────────────────────── -->
+<footer class="landing-footer">
+  <div class="footer-brand">Uyên English 🇺🇸</div>
+  <div class="footer-contact">
+    <div class="footer-contact-item">📞 0838 323 276</div>
+    <div class="footer-contact-item">✉️ phamnhauyen2008@gmail.com</div>
+    <div class="footer-contact-item">🏫 Cựu HS THPT Chuyên Trần Văn Giàu</div>
+  </div>
+  <div class="footer-bottom">
+    <div style="margin-bottom: var(--space-2);">© 2026 Phạm Nhã Uyên. All rights reserved.</div>
+    <div style="font-size: 0.85em; color: rgba(255,255,255,0.6);">
+      Proudly designed & powered by <a href="https://home.heavietnam.com/" target="_blank" style="color: #fff; text-decoration: underline; font-weight: 600; text-underline-offset: 2px;">HEAVN</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Toast container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script>
+// ── Navbar scroll ─────────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  document.getElementById('landingNav').classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// ── Smooth scroll for anchor links ───────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+// ── Initialize EmailJS ────────────────────────────────────────
+// Đã cấu hình Public Key
+emailjs.init("AoPRyLOGRSwXBhPRW");
+
+// ── Register form ─────────────────────────────────────────────
+document.getElementById('registerForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('registerBtn');
+  btn.textContent = 'Đang gửi...';
+  btn.disabled = true;
+
+  const name    = document.getElementById('regName').value;
+  const phone   = document.getElementById('regPhone').value;
+  const email   = document.getElementById('regEmail').value;
+  const course  = document.getElementById('regCourse').value;
+  const note    = document.getElementById('regNote').value;
+
+  try {
+    // === EmailJS Integration ===
+    // Đã cấu hình Service ID và Template ID
+    await emailjs.send('service_uc5rns9', 'template_0ouwdjp', {
+      to_name: 'Cô Nhã Uyên',
+      from_name: name,
+      student_name: name,
+      phone: phone,
+      email: email,
+      course: course,
+      message: note
+    });
+
+    // Show success
+    document.getElementById('registerForm').style.display = 'none';
+    document.getElementById('registerSuccess').style.display = 'block';
+    showToast('success', '🎉 Đăng ký thành công! Cô Uyên sẽ liên hệ sớm.');
+  } catch (error) {
+    console.error('EmailJS Error:', error);
+    // Nếu chưa cấu hình Key, hệ thống vẫn sẽ cho qua để không bị lỗi giao diện
+    if (error && error.status === 400 && error.text && error.text.includes("public key")) {
+       showToast('error', 'Vui lòng thay thế YOUR_PUBLIC_KEY bằng key thật của bạn trong mã nguồn!');
+    } else {
+       showToast('error', 'Có lỗi xảy ra khi gửi đăng ký. Vui lòng thử lại!');
+    }
+    btn.textContent = 'Đăng ký ngay';
+    btn.disabled = false;
+  }
+});
+
+// ── Toast ─────────────────────────────────────────────────────
+function showToast(type, msg) {
+  const tc = document.getElementById('toastContainer');
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  toast.innerHTML = `<span class="toast-icon">${type === 'success' ? '✅' : '❌'}</span><span class="toast-msg">${msg}</span>`;
+  tc.appendChild(toast);
+  setTimeout(() => toast.remove(), 4000);
+}
+</script>
+
+<!-- GSAP Landing Animations -->
+<script src="js/gsap-landing.js"></script>
+
+</body>
+</html>

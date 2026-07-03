@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đăng nhập – Uyên English</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="description" content="Đăng nhập vào hệ thống học Tiếng Anh cùng Cô Nhã Uyên." />
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/enhancements.css" />
+  <!-- GSAP CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: stretch;
+      background: var(--bg-page);
+    }
+
+    /* ── Left Panel ─────────────────────────────────────── */
+    .login-left {
+      flex: 1;
+      background: linear-gradient(135deg, var(--primary-900) 0%, var(--primary-700) 60%, #1a5ca8 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-12);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .login-left::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.04);
+    }
+
+    .login-left::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -60px;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.03);
+    }
+
+    .login-brand {
+      position: relative; z-index: 1;
+      text-align: center;
+      margin-bottom: var(--space-12);
+    }
+
+    .login-brand-icon {
+      width: 72px; height: 72px;
+      background: rgba(255,255,255,.15);
+      border: 2px solid rgba(255,255,255,.2);
+      border-radius: var(--radius-2xl);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem; font-weight: 800; color: #fff;
+      margin: 0 auto var(--space-5);
+      backdrop-filter: blur(8px);
+    }
+
+    .login-brand-name {
+      font-size: var(--font-size-2xl);
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: var(--space-2);
+    }
+
+    .login-brand-sub {
+      font-size: var(--font-size-sm);
+      color: rgba(255,255,255,.6);
+    }
+
+    .login-feature-list {
+      position: relative; z-index: 1;
+      width: 100%;
+      max-width: 360px;
+    }
+
+    .login-feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-4);
+      padding: var(--space-5);
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: var(--radius-xl);
+      margin-bottom: var(--space-4);
+      backdrop-filter: blur(8px);
+      transition: all var(--transition-base);
+    }
+
+    .login-feature-item:hover {
+      background: rgba(255,255,255,.12);
+      transform: translateX(4px);
+    }
+
+    .login-feature-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .login-feature-text .ft-title {
+      font-size: var(--font-size-sm);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+
+    .login-feature-text .ft-desc {
+      font-size: var(--font-size-xs);
+      color: rgba(255,255,255,.55);
+      line-height: 1.5;
+    }
+
+    /* ── Right Panel ────────────────────────────────────── */
+    .login-right {
+      width: 460px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-10);
+      background: #fff;
+    }
+
+    .login-form-wrap {
+      width: 100%;
+      max-width: 380px;
+    }
+
+    .login-header {
+      margin-bottom: var(--space-8);
+    }
+
+    .login-header-tag {
+      display: inline-block;
+      background: var(--primary-100);
+      color: var(--primary-600);
+      font-size: var(--font-size-xs);
+      font-weight: 700;
+      padding: var(--space-1) var(--space-3);
+      border-radius: var(--radius-full);
+      margin-bottom: var(--space-4);
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    .login-title {
+      font-size: var(--font-size-2xl);
+      font-weight: 800;
+      color: var(--gray-900);
+      margin-bottom: var(--space-2);
+    }
+
+    .login-subtitle {
+      font-size: var(--font-size-sm);
+      color: var(--gray-500);
+    }
+
+    /* Input with icon */
+    .input-group {
+      position: relative;
+      margin-bottom: var(--space-5);
+    }
+
+    .input-icon {
+      position: absolute;
+      left: var(--space-4);
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1rem;
+      color: var(--gray-400);
+      pointer-events: none;
+    }
+
+    .input-group .form-input {
+      padding-left: calc(var(--space-4) + 1.5rem + var(--space-2));
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: var(--space-4);
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--gray-400);
+      cursor: pointer;
+      font-size: 0.9rem;
+      padding: 0;
+      transition: color var(--transition-fast);
+    }
+
+    .password-toggle:hover { color: var(--primary-500); }
+
+    .login-options {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-6);
+    }
+
+    .remember-me {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--font-size-sm);
+      color: var(--gray-600);
+      cursor: pointer;
+    }
+
+    .remember-me input[type="checkbox"] {
+      width: 16px; height: 16px;
+      accent-color: var(--primary-500);
+    }
+
+    .forgot-link {
+      font-size: var(--font-size-sm);
+      color: var(--primary-500);
+      font-weight: 500;
+      transition: color var(--transition-fast);
+    }
+
+    .forgot-link:hover { color: var(--primary-700); }
+
+    .btn-login {
+      width: 100%;
+      padding: var(--space-4);
+      background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+      color: #fff;
+      font-size: var(--font-size-base);
+      font-weight: 700;
+      border-radius: var(--radius-xl);
+      border: none;
+      cursor: pointer;
+      transition: all var(--transition-base);
+      box-shadow: 0 6px 20px rgba(36,81,209,.3);
+    }
+
+    .btn-login:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(36,81,209,.4);
+    }
+
+    .btn-login:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .login-error {
+      background: #fee2e2;
+      border: 1px solid #fecaca;
+      border-radius: var(--radius-lg);
+      padding: var(--space-3) var(--space-4);
+      font-size: var(--font-size-sm);
+      color: #dc2626;
+      margin-bottom: var(--space-4);
+      display: none;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .login-footer-note {
+      margin-top: var(--space-6);
+      text-align: center;
+      font-size: var(--font-size-xs);
+      color: var(--gray-400);
+    }
+
+    .login-footer-note a {
+      color: var(--primary-500);
+      font-weight: 600;
+    }
+
+    .demo-accounts {
+      margin-top: var(--space-6);
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: var(--space-4);
+    }
+
+    .demo-title {
+      font-size: var(--font-size-xs);
+      font-weight: 700;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: var(--space-3);
+    }
+
+    .demo-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--space-2) var(--space-3);
+      background: #fff;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--gray-200);
+      margin-bottom: var(--space-2);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .demo-item:last-child { margin-bottom: 0; }
+
+    .demo-item:hover {
+      background: var(--primary-50);
+      border-color: var(--primary-200);
+    }
+
+    .demo-email { font-size: var(--font-size-xs); font-weight: 600; color: var(--gray-700); }
+    .demo-role { font-size: 0.65rem; color: var(--gray-400); }
+    .demo-use {
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--primary-500);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .login-left { display: none; }
+      .login-right { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Left Panel ─────────────────────────────────────────── -->
+<div class="login-left">
+  <div class="login-brand">
+    <div class="login-brand-icon">UE</div>
+    <div class="login-brand-name">Uyên English</div>
+    <div class="login-brand-sub">Nền tảng học Tiếng Anh online</div>
+  </div>
+
+  <div class="login-feature-list">
+    <div class="login-feature-item">
+      <div class="login-feature-icon">🎥</div>
+      <div class="login-feature-text">
+        <div class="ft-title">Video bài giảng chất lượng cao</div>
+        <div class="ft-desc">Truy cập video bài học và tài liệu PDF mọi lúc, mọi nơi</div>
+      </div>
+    </div>
+    <div class="login-feature-item">
+      <div class="login-feature-icon">📊</div>
+      <div class="login-feature-text">
+        <div class="ft-title">Theo dõi tiến độ học tập</div>
+        <div class="ft-desc">Biểu đồ trực quan giúp bạn biết mình đang ở đâu trong khóa học</div>
+      </div>
+    </div>
+    <div class="login-feature-item">
+      <div class="login-feature-icon">📅</div>
+      <div class="login-feature-text">
+        <div class="ft-title">Lịch học cá nhân hóa</div>
+        <div class="ft-desc">Xem lịch học theo tuần và nhận nhắc nhở buổi học sắp tới</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Right Panel ─────────────────────────────────────────── -->
+<div class="login-right">
+  <div class="login-form-wrap">
+    <div class="login-header">
+      <div class="login-header-tag">Xin chào 👋</div>
+      <h1 class="login-title">Đăng nhập</h1>
+      <p class="login-subtitle">Tài khoản của bạn do Cô Uyên cấp sau khi đăng ký khóa học.</p>
+    </div>
+
+    <!-- Error message -->
+    <div class="login-error" id="loginError">
+      <span>⚠️</span>
+      <span id="loginErrorMsg">Email hoặc mật khẩu không đúng. Vui lòng thử lại.</span>
+    </div>
+
+    <!-- Form -->
+    <form id="loginForm">
+      <div class="form-group">
+        <label class="form-label" for="loginEmail">Email</label>
+        <div class="input-group">
+          <span class="input-icon">✉️</span>
+          <input
+            type="email"
+            id="loginEmail"
+            class="form-input"
+            placeholder="email@gmail.com"
+            autocomplete="email"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="loginPassword">Mật khẩu</label>
+        <div class="input-group">
+          <span class="input-icon">🔒</span>
+          <input
+            type="password"
+            id="loginPassword"
+            class="form-input"
+            placeholder="Nhập mật khẩu"
+            autocomplete="current-password"
+            required
+          />
+          <button type="button" class="password-toggle" id="pwToggle" aria-label="Hiển thị mật khẩu">👁️</button>
+        </div>
+      </div>
+
+      <div class="login-options">
+        <label class="remember-me">
+          <input type="checkbox" id="rememberMe" />
+          Ghi nhớ đăng nhập
+        </label>
+        <a href="#" class="forgot-link">Quên mật khẩu?</a>
+      </div>
+
+      <button type="submit" class="btn-login" id="loginBtn">
+        Đăng nhập →
+      </button>
+    </form>
+
+    <div class="login-footer-note">
+      Chưa có tài khoản? <a href="index.html#register">Đăng ký ngay</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Password Toggle ───────────────────────────────────────────
+document.getElementById('pwToggle').addEventListener('click', function() {
+  const pwInput = document.getElementById('loginPassword');
+  if (pwInput.type === 'password') {
+    pwInput.type = 'text';
+    this.textContent = '🙈';
+  } else {
+    pwInput.type = 'password';
+    this.textContent = '👁️';
+  }
+});
+
+// ── Login Logic ───────────────────────────────────────────────
+document.getElementById('loginForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('loginBtn');
+  const errorEl = document.getElementById('loginError');
+  const errorMsg = document.getElementById('loginErrorMsg');
+
+  btn.textContent = 'Đang xác thực...';
+  btn.disabled = true;
+  errorEl.style.display = 'none';
+
+  const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+  const password = document.getElementById('loginPassword').value;
+  const remember = document.getElementById('rememberMe').checked;
+
+  try {
+    // Fetch user list from admin-managed JSON
+    const response = await fetch('data/users.json');
+    if (!response.ok) throw new Error('Không thể tải dữ liệu người dùng.');
+    const data = await response.json();
+
+    const user = data.users.find(u =>
+      u.email.toLowerCase() === email && u.password === password
+    );
+
+    if (!user) {
+      errorMsg.textContent = 'Email hoặc mật khẩu không đúng. Vui lòng thử lại.';
+      errorEl.style.display = 'flex';
+      btn.textContent = 'Đăng nhập →';
+      btn.disabled = false;
+      // GSAP shake animation
+      if (typeof window.shakeError === 'function') window.shakeError();
+      return;
+    }
+
+    // Save session
+    const sessionUser = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      avatar: user.avatar,
+      role: user.role || 'student',
+      courses: user.courses,
+      enrolledDate: user.enrolledDate || ''
+    };
+
+    if (remember) {
+      localStorage.setItem('ue_user', JSON.stringify(sessionUser));
+    } else {
+      sessionStorage.setItem('ue_user', JSON.stringify(sessionUser));
+    }
+
+    btn.textContent = '✅ Thành công! Đang chuyển trang...';
+    // GSAP success animation
+    if (typeof window.successAnimation === 'function') window.successAnimation();
+    setTimeout(() => {
+      window.location.href = 'dashboard.html';
+    }, 800);
+
+  } catch (err) {
+    errorMsg.textContent = 'Lỗi kết nối. Vui lòng kiểm tra file users.json.';
+    errorEl.style.display = 'flex';
+    btn.textContent = 'Đăng nhập →';
+    btn.disabled = false;
+    console.error(err);
+  }
+});
+
+// ── Auto-login if session exists ─────────────────────────────
+(function checkSession() {
+  const stored = localStorage.getItem('ue_user') || sessionStorage.getItem('ue_user');
+  if (stored) window.location.href = 'dashboard.html';
+})();
+</script>
+
+<!-- GSAP Login Animations -->
+<script src="js/gsap-login.js"></script>
+
+</body>
+</html>

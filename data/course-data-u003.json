@@ -1,0 +1,192 @@
+[
+  {
+    "course_id": "custom-course",
+    "title": "Khóa học dành cho Võ Nguyễn Hoàng Long",
+    "subtitle": "Lộ trình kèm 1-1 chuyên sâu dành riêng cho Võ Nguyễn Hoàng Long",
+    "description": "Khóa học giúp học sinh cấp 1, cấp 2 xây dựng nền tảng Tiếng Anh vững chắc. Học viên sẽ được học ngữ pháp cơ bản, phrasal verbs, idioms và kỹ năng làm bài thi hiệu quả.",
+    "teacher": "Phạm Nhã Uyên",
+    "rating": 5,
+    "reviews": 24,
+    "thumbnail": "",
+    "weeks": [
+      {
+        "week_id": "w1",
+        "name": "Tuần 1 – Nền Tảng Ngữ Pháp",
+        "sessions": [
+          {
+            "session_id": "w1s1",
+            "name": "Buổi 1 – Thì Hiện Tại Đơn & Hiện Tại Tiếp Diễn",
+            "date": "2026-07-05",
+            "time": "08:00",
+            "files": [
+              {
+                "file_id": "w1s1f1",
+                "type": "video",
+                "name": "Video bài giảng – Thì Hiện Tại",
+                "drive_id": "1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms",
+                "size": ""
+              },
+              {
+                "file_id": "w1s1f2",
+                "type": "pdf",
+                "name": "Slide bài giảng – Thì Hiện Tại",
+                "drive_id": "1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms",
+                "size": "2.1 MB"
+              },
+              {
+                "file_id": "w1s1f3",
+                "type": "pdf",
+                "name": "Bài tập về nhà – Buổi 1",
+                "drive_id": "1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms",
+                "size": "512 KB"
+              }
+            ]
+          },
+          {
+            "session_id": "w1s2",
+            "name": "Buổi 2 – Thì Quá Khứ Đơn & Quá Khứ Tiếp Diễn",
+            "date": "2026-07-08",
+            "time": "08:00",
+            "files": [
+              {
+                "file_id": "w1s2f1",
+                "type": "video",
+                "name": "Video bài giảng – Thì Quá Khứ",
+                "drive_id": "1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms",
+                "size": ""
+              },
+              {
+                "file_id": "w1s2f2",
+                "type": "pdf",
+                "name": "Slide bài giảng – Thì Quá Khứ",
+                "drive_id": "1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms",
+                "size": "1.8 MB"
+              },
+              {
+                "file_id": "w1s2f3",
+                "type": "pdf",
+                "name": "Bài tập về nhà – Buổi 2",
+                "drive_id": "1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms",
+                "size": "480 KB"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "week_id": "w2",
+        "name": "Tuần 2 – Từ Vựng & Phrasal Verbs",
+        "sessions": [
+          {
+            "session_id": "w2s1",
+            "name": "Buổi 3 – Phrasal Verbs Thông Dụng (Phần 1)",
+            "date": "2026-07-12",
+            "time": "08:00",
+            "files": [
+              {
+                "file_id": "w2s1f1",
+                "type": "video",
+                "name": "Video bài giảng – Phrasal Verbs P1",
+                "drive_id": "1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms",
+                "size": ""
+              },
+              {
+                "file_id": "w2s1f2",
+                "type": "pdf",
+                "name": "Danh sách 50 Phrasal Verbs cơ bản",
+                "drive_id": "1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms",
+                "size": "1.2 MB"
+              }
+            ]
+          },
+          {
+            "session_id": "w2s2",
+            "name": "Buổi 4 – Idioms & Expressions Thường Gặp",
+            "date": "2026-07-15",
+            "time": "08:00",
+            "files": [
+              {
+                "file_id": "w2s2f1",
+                "type": "video",
+                "name": "Video bài giảng – Idioms",
+                "drive_id": "1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms",
+                "size": ""
+              },
+              {
+                "file_id": "w2s2f2",
+                "type": "pdf",
+                "name": "Tổng hợp Idioms theo chủ đề",
+                "drive_id": "1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms",
+                "size": "1.5 MB"
+              },
+              {
+                "file_id": "w2s2f3",
+                "type": "pdf",
+                "name": "Bài tập tổng hợp Tuần 2",
+                "drive_id": "1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms",
+                "size": "640 KB"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "week_id": "w3",
+        "name": "Tuần 3 – Kỹ Năng Làm Bài Thi",
+        "sessions": [
+          {
+            "session_id": "w3s1",
+            "name": "Buổi 5 – Kỹ Năng Đọc Hiểu (Reading)",
+            "date": "2026-07-19",
+            "time": "08:00",
+            "files": [
+              {
+                "file_id": "w3s1f1",
+                "type": "video",
+                "name": "Video – Phương pháp đọc hiểu nhanh",
+                "drive_id": "1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms",
+                "size": ""
+              },
+              {
+                "file_id": "w3s1f2",
+                "type": "pdf",
+                "name": "Đề luyện tập Reading – Số 1",
+                "drive_id": "1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms",
+                "size": "900 KB"
+              }
+            ]
+          },
+          {
+            "session_id": "w3s2",
+            "name": "Buổi 6 – Kỹ Năng Viết (Writing Basics)",
+            "date": "2026-07-22",
+            "time": "08:00",
+            "files": [
+              {
+                "file_id": "w3s2f1",
+                "type": "video",
+                "name": "Video – Cấu trúc câu & Viết đoạn văn",
+                "drive_id": "1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms",
+                "size": ""
+              },
+              {
+                "file_id": "w3s2f2",
+                "type": "pdf",
+                "name": "Template các dạng bài viết thường gặp",
+                "drive_id": "1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms",
+                "size": "750 KB"
+              },
+              {
+                "file_id": "w3s2f3",
+                "type": "pdf",
+                "name": "Bài tập Writing thực hành – Buổi 6",
+                "drive_id": "1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms",
+                "size": "520 KB"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
