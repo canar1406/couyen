@@ -1,24 +1,6 @@
 {
   "users": [
     {
-      "id": "u001",
-      "name": "Nguyễn Văn An",
-      "email": "vanan@gmail.com",
-      "password": "hocvien123",
-      "avatar": "NA",
-      "courses": ["custom-course"],
-      "enrolledDate": "2026-06-01"
-    },
-    {
-      "id": "u002",
-      "name": "Trần Thị Bình",
-      "email": "thibinh@gmail.com",
-      "password": "hocvien456",
-      "avatar": "TB",
-      "courses": ["custom-course"],
-      "enrolledDate": "2026-06-10"
-    },
-    {
       "id": "u003",
       "name": "Võ Nguyễn Hoàng Long",
       "email": "hoanglong@gmail.com",
