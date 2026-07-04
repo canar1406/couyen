@@ -690,7 +690,7 @@ function showToast(type, msg) {
 
 // ── Init ──────────────────────────────────────────────────────
 async function runInit() {
-  await init();
+  await loadCourseData();
   // Animate TOC after render
   if (typeof window.animateTOC === 'function') window.animateTOC();
 }
