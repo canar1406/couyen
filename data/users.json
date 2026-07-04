@@ -1,12 +1,12 @@
 {
   "users": [
     {
-      "id": "u003",
+      "id": "u001",
       "name": "Võ Nguyễn Hoàng Long",
       "email": "hoanglong@gmail.com",
       "password": "hocvien789",
       "avatar": "HL",
-      "courses": ["course-u003"],
+      "courses": ["course-u001"],
       "enrolledDate": "2026-07-03"
     },
     {
