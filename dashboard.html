@@ -255,18 +255,32 @@ setInterval(updateCountdown, 1000);
 // ── Load Courses ──────────────────────────────────────────────
 async function loadCourses() {
   let courses = [];
-  try {
-    const res = await fetch(`data/course-data-${currentUser.id}.json`);
-    courses = await res.json();
-  } catch (error) {
-    console.warn('Local fetch failed, using fallback data:', error);
-    courses = [
-      {"course_id":"english-basic","title":"Tiếng Anh Nền Tảng – Cô Nhã Uyên","subtitle":"Ngữ pháp cơ bản, Từ vựng & Kỹ năng làm bài thi","teacher":"Phạm Nhã Uyên","rating":5.0,"reviews":24,"weeks":[{"week_id":"w1","name":"Tuần 1 – Nền Tảng Ngữ Pháp","sessions":[{"session_id":"w1s1","name":"Buổi 1 – Thì Hiện Tại Đơn & Hiện Tại Tiếp Diễn","date":"2026-07-05","time":"08:00"},{"session_id":"w1s2","name":"Buổi 2 – Thì Quá Khứ Đơn & Quá Khứ Tiếp Diễn","date":"2026-07-08","time":"08:00"}]},{"week_id":"w2","name":"Tuần 2 – Từ Vựng & Phrasal Verbs","sessions":[{"session_id":"w2s1","name":"Buổi 3 – Phrasal Verbs Thông Dụng (Phần 1)","date":"2026-07-12","time":"08:00"},{"session_id":"w2s2","name":"Buổi 4 – Idioms & Expressions Thường Gặp","date":"2026-07-15","time":"08:00"}]},{"week_id":"w3","name":"Tuần 3 – Kỹ Năng Làm Bài Thi","sessions":[{"session_id":"w3s1","name":"Buổi 5 – Kỹ Năng Đọc Hiểu (Reading)","date":"2026-07-19","time":"08:00"},{"session_id":"w3s2","name":"Buổi 6 – Kỹ Năng Viết (Writing Basics)","date":"2026-07-22","time":"08:00"}]}]},
-      {"course_id":"ngu-phap-chuyen-sau","title":"Ngữ Pháp Chuyên Sâu","subtitle":"Bứt phá điểm số với các chuyên đề ngữ pháp nâng cao","teacher":"Phạm Nhã Uyên","rating":4.9,"reviews":18,"weeks":[]},
-      {"course_id":"tu-vung-phrasal-verbs","title":"Từ Vựng & Phrasal Verbs","subtitle":"Mở rộng vốn từ vựng và thành ngữ ứng dụng thực tế","teacher":"Phạm Nhã Uyên","rating":5.0,"reviews":42,"weeks":[]},
-      {"course_id":"luyen-thi-ky-nang","title":"Luyện Thi – Kỹ Năng Làm Bài","subtitle":"Chiến thuật giải đề và tối ưu thời gian làm bài thi","teacher":"Phạm Nhã Uyên","rating":4.8,"reviews":56,"weeks":[]}
-    ];
+  
+  if (currentUser.role === 'admin') {
+    try {
+      const usersRes = await fetch('data/users.json');
+      const usersData = await usersRes.json();
+      const students = usersData.users.filter(u => u.role !== 'admin');
+      
+      for (const student of students) {
+        try {
+          const res = await fetch(`data/course-data-${student.id}.json`);
+          const studentCourses = await res.json();
+          courses = courses.concat(studentCourses);
+        } catch(e) { console.warn(`Could not load courses for ${student.id}`); }
+      }
+    } catch(err) {
+      console.error('Admin course load error', err);
+    }
+  } else {
+    try {
+      const res = await fetch(`data/course-data-${currentUser.id}.json`);
+      courses = await res.json();
+    } catch (error) {
+      console.warn('Local fetch failed, using fallback data:', error);
+    }
   }
+
 
   try {
     const grid = document.getElementById('coursesGrid');

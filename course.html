@@ -221,14 +221,30 @@ const COURSE_ID = new URLSearchParams(location.search).get('id') || 'english-bas
 const PROGRESS_KEY = `ue_progress_${COURSE_ID}`;
 
 // ── Load & Render ─────────────────────────────────────────────
-async function init() {
+async function loadCourseData() {
   let allCourses = [];
-  try {
-    const res = await fetch(`data/course-data-${currentUser.id}.json`);
-    allCourses = await res.json();
-  } catch (err) {
-    console.warn('Local fetch failed, using fallback data:', err);
-    allCourses = [{"course_id":"english-basic","title":"Tiếng Anh Nền Tảng – Cô Nhã Uyên","subtitle":"Ngữ pháp cơ bản, Từ vựng & Kỹ năng làm bài thi","teacher":"Phạm Nhã Uyên","rating":5.0,"reviews":24,"weeks":[{"week_id":"w1","name":"Tuần 1 – Nền Tảng Ngữ Pháp","sessions":[{"session_id":"w1s1","name":"Buổi 1 – Thì Hiện Tại Đơn & Hiện Tại Tiếp Diễn","date":"2026-07-05","time":"08:00","files":[{"file_id":"w1s1f1","type":"video","name":"Video bài giảng – Thì Hiện Tại","drive_id":"1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"},{"file_id":"w1s1f2","type":"pdf","name":"Slide bài giảng – Thì Hiện Tại","drive_id":"1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"},{"file_id":"w1s1f3","type":"pdf","name":"Bài tập về nhà – Buổi 1","drive_id":"1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"}]},{"session_id":"w1s2","name":"Buổi 2 – Thì Quá Khứ Đơn & Quá Khứ Tiếp Diễn","date":"2026-07-08","time":"08:00","files":[{"file_id":"w1s2f1","type":"video","name":"Video bài giảng – Thì Quá Khứ","drive_id":"1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"},{"file_id":"w1s2f2","type":"pdf","name":"Slide bài giảng – Thì Quá Khứ","drive_id":"1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"},{"file_id":"w1s2f3","type":"pdf","name":"Bài tập về nhà – Buổi 2","drive_id":"1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"}]}]},{"week_id":"w2","name":"Tuần 2 – Từ Vựng & Phrasal Verbs","sessions":[{"session_id":"w2s1","name":"Buổi 3 – Phrasal Verbs Thông Dụng (Phần 1)","date":"2026-07-12","time":"08:00","files":[{"file_id":"w2s1f1","type":"video","name":"Video bài giảng – Phrasal Verbs P1","drive_id":"1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"},{"file_id":"w2s1f2","type":"pdf","name":"Danh sách 50 Phrasal Verbs cơ bản","drive_id":"1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"}]},{"session_id":"w2s2","name":"Buổi 4 – Idioms & Expressions Thường Gặp","date":"2026-07-15","time":"08:00","files":[{"file_id":"w2s2f1","type":"video","name":"Video bài giảng – Idioms","drive_id":"1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"},{"file_id":"w2s2f2","type":"pdf","name":"Tổng hợp Idioms theo chủ đề","drive_id":"1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"},{"file_id":"w2s2f3","type":"pdf","name":"Bài tập tổng hợp Tuần 2","drive_id":"1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"}]}]},{"week_id":"w3","name":"Tuần 3 – Kỹ Năng Làm Bài Thi","sessions":[{"session_id":"w3s1","name":"Buổi 5 – Kỹ Năng Đọc Hiểu (Reading)","date":"2026-07-19","time":"08:00","files":[{"file_id":"w3s1f1","type":"video","name":"Video – Phương pháp đọc hiểu nhanh","drive_id":"1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"},{"file_id":"w3s1f2","type":"pdf","name":"Đề luyện tập Reading – Số 1","drive_id":"1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"}]},{"session_id":"w3s2","name":"Buổi 6 – Kỹ Năng Viết (Writing Basics)","date":"2026-07-22","time":"08:00","files":[{"file_id":"w3s2f1","type":"video","name":"Video – Cấu trúc câu & Viết đoạn văn","drive_id":"1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"},{"file_id":"w3s2f2","type":"pdf","name":"Template các dạng bài viết thường gặp","drive_id":"1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"},{"file_id":"w3s2f3","type":"pdf","name":"Bài tập Writing thực hành – Buổi 6","drive_id":"1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms"}]}]}]}];
+  
+  if (currentUser.role === 'admin') {
+    try {
+      const usersRes = await fetch('data/users.json');
+      const usersData = await usersRes.json();
+      const students = usersData.users.filter(u => u.role !== 'admin');
+      
+      for (const student of students) {
+        try {
+          const res = await fetch(`data/course-data-${student.id}.json`);
+          const studentCourses = await res.json();
+          allCourses = allCourses.concat(studentCourses);
+        } catch(e) {}
+      }
+    } catch(err) {}
+  } else {
+    try {
+      const res = await fetch(`data/course-data-${currentUser.id}.json`);
+      allCourses = await res.json();
+    } catch (err) {
+      console.warn('Local fetch failed, using fallback data:', err);
+    }
   }
 
   try {
